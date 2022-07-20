@@ -17,14 +17,12 @@ import Moya
 class ViewController: UIViewController {
     
     struct Metric {
-        static let collectionViewItemSize = CGSize(
-          width: (UIScreen.main.bounds.width - 32.0 - Self.collectionViewSpacing) / 3.0,
-          height: 96
-        )
-        
-        static let collectionViewSpacing = 8.0
-        
-        static let collectionViewContentInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+      static let collectionViewItemSize = CGSize(
+        width: (UIScreen.main.bounds.width - 32.0 - Self.collectionViewSpacing) / 3.0,
+        height: 96
+      )
+      static let collectionViewSpacing = 8.0
+      static let collectionViewContentInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
     }
     
     struct Color {
@@ -32,7 +30,6 @@ class ViewController: UIViewController {
     }
     
     private let disposeBag = DisposeBag()
-
     //데이터가 저장될 PhotoDataSource 정의
     private let photoDataSource = BehaviorRelay<[PhotoSection]>(value: [])
     
@@ -44,25 +41,112 @@ class ViewController: UIViewController {
     
     private let collectionView = UICollectionView(
         frame: .zero,
-        collectionViewLayout: UICollectionViewLayout().then {
+        collectionViewLayout: UICollectionViewFlowLayout().then{
             $0.itemSize = Metric.collectionViewItemSize
             $0.minimumLineSpacing = Metric.collectionViewSpacing
             $0.minimumInteritemSpacing = Metric.collectionViewSpacing
         }
     ).then {
-        $0.register(cellType: P)
+        $0.register(cellType: PhotoCell.self)
+        $0.contentInset = Metric.collectionViewContentInset
+        $0.showsHorizontalScrollIndicator = false
+        $0.allowsSelection = true
+        $0.isScrollEnabled = true
+        $0.bounces = true
+        $0.backgroundColor = Color.collectionViewBackgroudColor
     }
     
-    //RxDataSources 정의
-//    private func setupCollectionViewDataSource() {
-//        let collectionViewDataSource = RxCollectionViewSectionedReloadDataSource<PhotoSection> { _, collectionView, indexPath, sectionItme in
-//
-//        }
-//    }
+    private var loadImageButtonTapObservable: Observable<Void> {
+        self.loadImageButton.rx
+            .tap.asObservable()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.configurationLayout()
+        self.setupCollectionViewDataSource()
+        self.configureBind()
+    }
+    
+    private func configurationLayout() {
+        self.view.addSubviews(
+            loadImageButton,
+            collectionView
+        )
+        
+        loadImageButton.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(56)
+            $0.centerX.equalToSuperview()
+        }
+        
+        collectionView.snp.makeConstraints {
+            $0.top.equalTo(loadImageButton.snp.bottom).offset(8)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+    }
+    
+    private func setupCollectionViewDataSource() {
+        let collectionViewDataSource = RxCollectionViewSectionedReloadDataSource<PhotoSection> { _, collectionView, indexPath, sectionItem in
+            Self.collectionViewConfigureCell(
+                collectionView: collectionView,
+                indexPath: indexPath,
+                item: sectionItem
+            )
+        }
+        
+        self.photoDataSource
+            .bind(to: self.collectionView.rx.items(dataSource: collectionViewDataSource))
+            .disposed(by: disposeBag)
+    }
+    
+    private static func collectionViewConfigureCell(
+        collectionView: UICollectionView,
+        indexPath: IndexPath,
+        item: PhotoSectionItem
+    ) -> UICollectionViewCell {
+        switch item {
+        case let .result(photo):
+            let cell = collectionView.dequeueReusableCell(for: indexPath) as PhotoCell
+            cell.setImage(photo: photo)
+            return cell
+        }
+    }
+    
+    private func configureBind() {
+        loadImageButtonTapObservable
+            .mapVoid()
+            .bind(onNext: self.loadImage)
+            .disposed(by: disposeBag)
+    }
+    
+    private func loadImage() {
+        let photoRequest = PhotoRequest()
+        MyAPI.getPhotos(photoRequest)
+            .request()
+            .map {
+                let jsonString = try $0.mapString().removedEscapeCharacters
+                guard let value = jsonString.data(using: .utf8) else { return $0 }
+                
+                let newResponse = Response(
+                    statusCode: $0.statusCode,
+                    data: value,
+                    request: $0.request,
+                    response: $0.response
+                )
+                
+                return newResponse
+            }
+            .map(Photo.self, using: MyAPI.jsonDecoder)
+            .asObservable()
+            .bind(onNext: self.updatePhoto)
+            .disposed(by: disposeBag)
+    }
+    
+    private func updatePhoto(_ photo: Photo) {
+        let previousPhotos = photoDataSource.value
+        let newSectionItems = photo.items.map(PhotoSectionItem.result)
+        photoDataSource.accept(previousPhotos + [PhotoSection.result(newSectionItems)])
     }
 
 

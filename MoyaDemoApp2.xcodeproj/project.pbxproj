@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3141D5F12887D537009B89AC /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3141D5F02887D537009B89AC /* PhotoCell.swift */; };
+		3141D5F42887D6C7009B89AC /* UIImageView+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3141D5F32887D6C7009B89AC /* UIImageView+Kingfisher.swift */; };
+		3141D5F62887EE07009B89AC /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3141D5F52887EE07009B89AC /* UIView.swift */; };
+		3141D5F82887F6B0009B89AC /* RxOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3141D5F72887F6B0009B89AC /* RxOperation.swift */; };
+		3141D5FA2887FB4D009B89AC /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3141D5F92887FB4D009B89AC /* String.swift */; };
 		3B13DFDCD9ADFAFED887A051 /* Pods_MoyaDemoApp2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B929DC1FBADC2800F2B9A37C /* Pods_MoyaDemoApp2.framework */; };
 		AB5ADA862886E4F80060B082 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5ADA852886E4F80060B082 /* AppDelegate.swift */; };
 		AB5ADA882886E4F80060B082 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5ADA872886E4F80060B082 /* SceneDelegate.swift */; };
@@ -28,6 +33,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3141D5F02887D537009B89AC /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		3141D5F32887D6C7009B89AC /* UIImageView+Kingfisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Kingfisher.swift"; sourceTree = "<group>"; };
+		3141D5F52887EE07009B89AC /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		3141D5F72887F6B0009B89AC /* RxOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxOperation.swift; sourceTree = "<group>"; };
+		3141D5F92887FB4D009B89AC /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		49ECCC4D90FC9681BB38FDD1 /* Pods-MoyaDemoApp2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoyaDemoApp2.debug.xcconfig"; path = "Target Support Files/Pods-MoyaDemoApp2/Pods-MoyaDemoApp2.debug.xcconfig"; sourceTree = "<group>"; };
 		AB5ADA822886E4F80060B082 /* MoyaDemoApp2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoyaDemoApp2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB5ADA852886E4F80060B082 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +74,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3141D5EF2887D522009B89AC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3141D5F02887D537009B89AC /* PhotoCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3141D5F22887D688009B89AC /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				3141D5F32887D6C7009B89AC /* UIImageView+Kingfisher.swift */,
+				3141D5F52887EE07009B89AC /* UIView.swift */,
+				3141D5F72887F6B0009B89AC /* RxOperation.swift */,
+				3141D5F92887FB4D009B89AC /* String.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		73BDBEF98EAFC32B0E7A274E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -95,6 +124,8 @@
 			isa = PBXGroup;
 			children = (
 				AB5ADAB12886FCE00060B082 /* Section */,
+				3141D5F22887D688009B89AC /* Utils */,
+				3141D5EF2887D522009B89AC /* Views */,
 				AB5ADAA12886EAA10060B082 /* Model */,
 				AB5ADA992886E6540060B082 /* Networking */,
 				AB5ADA852886E4F80060B082 /* AppDelegate.swift */,
@@ -279,17 +310,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3141D5FA2887FB4D009B89AC /* String.swift in Sources */,
 				AB5ADA8A2886E4F80060B082 /* ViewController.swift in Sources */,
+				3141D5F12887D537009B89AC /* PhotoCell.swift in Sources */,
 				AB5ADA862886E4F80060B082 /* AppDelegate.swift in Sources */,
 				AB5ADAA02886E92D0060B082 /* MyAPI.swift in Sources */,
 				AB5ADAB02886ED980060B082 /* MyAPI+Task.swift in Sources */,
 				AB5ADAAA2886EC2F0060B082 /* MyAPI+Method.swift in Sources */,
 				AB5ADAA82886EBC20060B082 /* Photo.swift in Sources */,
 				AB5ADAB32886FCF00060B082 /* PhotoSection.swift in Sources */,
+				3141D5F42887D6C7009B89AC /* UIImageView+Kingfisher.swift in Sources */,
 				AB5ADA882886E4F80060B082 /* SceneDelegate.swift in Sources */,
 				AB5ADAAE2886ED2F0060B082 /* MyAPI+Request.swift in Sources */,
 				AB5ADA9C2886E6A30060B082 /* Moya+NetworkError.swift in Sources */,
 				AB5ADAA62886EB160060B082 /* ModelType.swift in Sources */,
+				3141D5F82887F6B0009B89AC /* RxOperation.swift in Sources */,
+				3141D5F62887EE07009B89AC /* UIView.swift in Sources */,
 				AB5ADAAC2886ECBF0060B082 /* MyAPI+Path.swift in Sources */,
 				AB5ADAA42886EACC0060B082 /* PhotoRequest.swift in Sources */,
 				AB5ADA9E2886E9070060B082 /* MyAPI+BaseURL.swift in Sources */,
@@ -368,7 +404,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -422,7 +458,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -440,7 +476,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9685R8WZ6J;
+				DEVELOPMENT_TEAM = M67SZ8Y635;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MoyaDemoApp2/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -469,7 +505,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9685R8WZ6J;
+				DEVELOPMENT_TEAM = M67SZ8Y635;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MoyaDemoApp2/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
