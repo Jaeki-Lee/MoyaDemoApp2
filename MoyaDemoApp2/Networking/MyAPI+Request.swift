@@ -154,6 +154,7 @@ extension MyAPI {
         let endpoint = MyAPI.Wrapper(base: self)
         let requestString = "\(endpoint.method) \(endpoint.baseURL) \(endpoint.path)"
         
+        //Self, 클래스, 구조체, enum 등에서 Self 를 사용하면 그 타입을 가리킨다
         return Self.moya.rx.request(endpoint)
             .filterSuccessfulStatusCodes()
             .catch(self.handleInternetConnection)

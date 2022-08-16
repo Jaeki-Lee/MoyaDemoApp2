@@ -122,8 +122,10 @@ class ViewController: UIViewController {
     
     private func loadImage() {
         let photoRequest = PhotoRequest()
+        //request(targetType.reqeust)
         MyAPI.getPhotos(photoRequest)
             .request()
+        //response
             .map {
                 let jsonString = try $0.mapString().removedEscapeCharacters
                 guard let value = jsonString.data(using: .utf8) else { return $0 }
@@ -137,8 +139,10 @@ class ViewController: UIViewController {
                 
                 return newResponse
             }
+        //response 를 Photo 타입으로 변환
             .map(Photo.self, using: MyAPI.jsonDecoder)
             .asObservable()
+        //함수에 변환된 데이터 삽입
             .bind(onNext: self.updatePhoto)
             .disposed(by: disposeBag)
     }
